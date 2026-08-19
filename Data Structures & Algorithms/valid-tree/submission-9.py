@@ -1,0 +1,24 @@
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        nodes = defaultdict(list)
+        for edge in edges:
+            nodes[edge[0]].append(edge[1])
+            nodes[edge[1]].append(edge[0])
+
+        visited = set()
+        def checkNoLoops(node, prev):
+            if node in visited:
+                return False
+
+            visited.add(node)
+            leaves = nodes[node]
+            valid = True
+            for leaf in leaves:
+                if leaf != prev:
+                    valid = valid and checkNoLoops(leaf, node)
+            return valid
+        
+        if not edges:
+            return True
+            
+        return (checkNoLoops(edges[0][0], None) and len(visited) == n)
