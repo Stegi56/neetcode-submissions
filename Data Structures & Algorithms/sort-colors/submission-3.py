@@ -1,0 +1,44 @@
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        # zeros, ones, twos = 0, 0, 0
+        # for i in range(len(nums)):
+        #     match nums[i]:
+        #         case 0:
+        #             zeros += 1
+        #         case 1:
+        #             ones += 1
+        #         case 2:
+        #             twos += 1
+        #         case _:
+        #             None
+        
+        # for i in range(len(nums)):
+        #     if zeros > 0:
+        #         nums[i] = 0
+        #         zeros -= 1
+        #     elif ones > 0:
+        #         nums[i] = 1
+        #         ones -= 1
+        #     elif twos > 0:
+        #         nums[i] = 2
+        #         twos -= 1
+
+        l, r = 0, len(nums) - 1
+        i = 0
+
+        def swap(i, j):
+            tmp = nums[i]
+            nums[i] = nums[j]
+            nums[j] = tmp
+
+        while i <= r:
+            if nums[i] == 0:
+                swap(l, i)
+                l += 1
+            elif nums[i] == 2:
+                swap(r, i)
+                r -= 1
+                i -= 1
+            i += 1
+
+    
